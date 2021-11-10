@@ -109,6 +109,20 @@
   margin-bottom: 0;
 }
 
+.hosting {
+  text-decoration: none;
+  color: rgb(3, 3, 3);
+  font: 400 12px/14px 'Roboto', sans-serif;
+  word-break:keep-all;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hosting:hover{
+  color: #3fb5a1;
+  cursor: pointer;
+}
+
 .socialNetwork {
   display: flex;
   justify-content: flex-end;
