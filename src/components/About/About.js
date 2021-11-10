@@ -148,6 +148,7 @@ class About extends React.Component {
                           </div>
                           <p className={styles.repoText}>Updated {new Date(repo.updated_at).toLocaleString('eng', { day:'numeric', month:'long', year:'numeric'})}</p>
                         </div>
+                        <a className={styles.hosting} href={'http://' + 'EmilLachinov8' + '.github.io/' + repo.name}>Hosting</a>
                       </li>
                     </Link>))}
                 </ul>}
