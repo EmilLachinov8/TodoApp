@@ -1,5 +1,5 @@
 import React from 'react';
-import {Octokit} from '@octokit/rest';
+import { Octokit } from '@octokit/rest';
 import styles from './About.module.css';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -31,50 +31,50 @@ class About extends React.Component {
   componentDidMount() {
     octokit.repos.listForUser({
       username: this.state.userName
-    }).then (({ data }) => {
+    }).then(({ data }) => {
       this.setState({
         repoList: data,
         isLoading: false,
         isError: false
       });
-    }).catch ((err) => {
-        this.setState({
-          isError: true,
-          isLoading: false,
-          error: 'Something is wrong: ' + err.name + ' ' + err.message
-        });
+    }).catch((err) => {
+      this.setState({
+        isError: true,
+        isLoading: false,
+        error: 'Something is wrong: ' + err.name + ' ' + err.message
       });
+    });
 
-      octokit.users.getByUsername({
-        username: this.state.userName
-      }).then (({data}) => {
-        this.setState({
-          User: data
-        })
-      }).catch ((err) => {console.log(err)})
+    octokit.users.getByUsername({
+      username: this.state.userName
+    }).then(({ data }) => {
+      this.setState({
+        User: data
+      })
+    }).catch((err) => { console.log(err) })
   }
 
-    onClickNext = () => {
-      this.setState({
-        firstRepo: this.state.firstRepo + 3,
-        lastRepo: this.state.lastRepo + 3
-      })
-    };
+  onClickNext = () => {
+    this.setState({
+      firstRepo: this.state.firstRepo + 3,
+      lastRepo: this.state.lastRepo + 3
+    })
+  };
 
-    onClickBack = () => {
-      this.setState({
-        firstRepo: this.state.firstRepo - 3,
-        lastRepo: this.state.lastRepo - 3
-      })
-    };
+  onClickBack = () => {
+    this.setState({
+      firstRepo: this.state.firstRepo - 3,
+      lastRepo: this.state.lastRepo - 3
+    })
+  };
 
   render() {
-    
+
     const { isLoading, isError, repoList, User, firstRepo, lastRepo } = this.state;
 
     return (
       <div>
-        { isLoading ? <LinearProgress /> : isError ? 
+        { isLoading ? <LinearProgress /> : isError ?
           <Card className={styles.repoCard + ' ' + styles.errorCard}>
             <div className={styles.errorWrap}>
               <img src={errorImg} alt='Something is wrong' className={styles.errorImg}></img>.
@@ -94,10 +94,10 @@ class About extends React.Component {
               </CardMedia>
               <CardContent className={styles.userInfo}>
                 <div className={styles.userInfoWrap}>
-                  <Typography  variant='h6' component='h2' color='primary' className={styles.userInfoTitle}>
+                  <Typography variant='h6' component='h2' color='primary' className={styles.userInfoTitle}>
                     {User.name}
-                  </Typography> 
-                    <Typography variant='body2' component='p' color='textSecondary' className={styles.userBio}>
+                  </Typography>
+                  <Typography variant='body2' component='p' color='textSecondary' className={styles.userBio}>
                     {User.bio}
                   </Typography>
                   <Link href='mailto: lachinov_em@mail.ru' color='textSecondary' underline='none' className={styles.emailLink}>
@@ -114,7 +114,7 @@ class About extends React.Component {
                     <ion-icon name='logo-github' className={styles.socialNetworkLogo}></ion-icon>
                   </Link>
                   <Link href='https://www.linkedin.com' color='textSecondary' underline='none' className={styles.socialNetworkLink}>
-                      <ion-icon name='logo-linkedin' className={styles.socialNetworkLogo}></ion-icon>
+                    <ion-icon name='logo-linkedin' className={styles.socialNetworkLogo}></ion-icon>
                   </Link>
                   <Link href='https://www.instagram.com/emilrahmetov/' color='textSecondary' underline='none' className={styles.socialNetworkLink}>
                     <ion-icon name='logo-instagram' className={styles.socialNetworkLogo}></ion-icon>
@@ -122,11 +122,22 @@ class About extends React.Component {
                 </div>
               </CardContent>
             </Card>
-
+            <Card className={styles.projectsCard}>
+              <CardContent className={styles.projectsWrap}>
+                <Typography variant='h6' component='h2' className={styles.repoTitle}>
+                  My projects:
+                </Typography>
+                <ul className={styles.list}>
+                  <li><a className={styles.list_item} href="https://emillachinov8.github.io/tesla-emil.github.io/">Site</a></li>
+                  <li><a className={styles.list_item} href="https://emillachinov8.github.io/JS-project/">Card game</a></li>
+                  <li><a className={styles.list_item} href="https://todo-app-lachinovem-git-final-lachinov-em-mailru.vercel.app/">ToDo app</a></li>
+                </ul>
+              </CardContent>
+            </Card>
             <Card className={styles.repoCard}>
               <CardContent className={styles.repoWrap}>
                 <Typography variant='h6' component='h2' className={styles.repoTitle}>
-                  My repositaries:
+                  My repositories:
                 </Typography>
                 {repoList.length > 0 && <ul className={styles.repoList}>
                   {repoList.slice(firstRepo, lastRepo).map(repo => (
@@ -146,24 +157,25 @@ class About extends React.Component {
                             <ion-icon name="git-network-outline" class={styles.repoForksIcon}></ion-icon>
                             <p className={styles.repoText}>{repo.forks}</p>
                           </div>
-                          <p className={styles.repoText}>Updated {new Date(repo.updated_at).toLocaleString('eng', { day:'numeric', month:'long', year:'numeric'})}</p>
+                          <p className={styles.repoText}>Updated {new Date(repo.updated_at).toLocaleString('eng', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                         </div>
+                        <p className={styles.repoText}>Updated {new Date(repo.updated_at).toLocaleString('eng', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                       </li>
                     </Link>))}
                 </ul>}
 
                 {repoList.length === 0 && <div className={styles.repoError}>
-                  <img src={errorImg} alt='no repositaries' className={styles.repoErrorImg}/>
-                  <h2 className={styles.repoErrorTitle}>no repositaries</h2>
-                  <p className={styles.repoErrorText}>Add one more repositary on <a href='https://github.com' className={styles.repoErrorLink}> github.com </a> </p>
-                </div>
-                }
+                <img src={errorImg} alt='no repositories' className={styles.repoErrorImg} />
+                <h2 className={styles.repoErrorTitle}>no repositaries</h2>
+                <p className={styles.repoErrorText}>Add one more repository on <a href='https://github.com' className={styles.repoErrorLink}> github.com </a> </p>
+              </div>
+              }
               </CardContent>
 
-              {repoList.length > 0 && <CardActions className={styles.buttonWrap}>
-                <Button className={styles.button} variant="outlined" disabled={firstRepo ===0} onClick={() => this.onClickBack()}>Back</Button>
-                <Button className={styles.button} variant="outlined" disabled={repoList.length - lastRepo <= 0} onClick={() => this.onClickNext()}>Next</Button>
-              </CardActions>
+            {repoList.length > 0 && <CardActions className={styles.buttonWrap}>
+              <Button className={styles.button} variant="outlined" disabled={firstRepo === 0} onClick={() => this.onClickBack()}>Back</Button>
+              <Button className={styles.button} variant="outlined" disabled={repoList.length - lastRepo <= 0} onClick={() => this.onClickNext()}>Next</Button>
+            </CardActions>
             }
             </Card>
           </div>
