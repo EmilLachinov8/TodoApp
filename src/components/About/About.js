@@ -130,7 +130,7 @@ class About extends React.Component {
                 <ul className={styles.list}>
                   <li><a className={styles.list_item} href="https://emillachinov8.github.io/tesla-emil.github.io/">Site</a></li>
                   <li><a className={styles.list_item} href="https://emillachinov8.github.io/JS-project/">Card game</a></li>
-                  <li><a className={styles.list_item} href="https://todo-app-lachinovem-git-final-lachinov-em-mailru.vercel.app/">ToDo app</a></li>
+                  <li><a className={styles.list_item} href="https://todo-app-lachinovem.vercel.app/">ToDo app</a></li>
                 </ul>
               </CardContent>
             </Card>
@@ -165,21 +165,21 @@ class About extends React.Component {
                 </ul>}
 
                 {repoList.length === 0 && <div className={styles.repoError}>
-                <img src={errorImg} alt='no repositories' className={styles.repoErrorImg} />
-                <h2 className={styles.repoErrorTitle}>no repositaries</h2>
-                <p className={styles.repoErrorText}>Add one more repository on <a href='https://github.com' className={styles.repoErrorLink}> github.com </a> </p>
-              </div>
-              }
+                  <img src={errorImg} alt='no repositories' className={styles.repoErrorImg} />
+                  <h2 className={styles.repoErrorTitle}>no repositaries</h2>
+                  <p className={styles.repoErrorText}>Add one more repository on <a href='https://github.com' className={styles.repoErrorLink}> github.com </a> </p>
+                </div>
+                }
               </CardContent>
 
-            {repoList.length > 0 && <CardActions className={styles.buttonWrap}>
-              <Button className={styles.button} variant="outlined" disabled={firstRepo === 0} onClick={() => this.onClickBack()}>Back</Button>
-              <Button className={styles.button} variant="outlined" disabled={repoList.length - lastRepo <= 0} onClick={() => this.onClickNext()}>Next</Button>
-            </CardActions>
-            }
+              {repoList.length > 0 && <CardActions className={styles.buttonWrap}>
+                <Button className={styles.button} variant="outlined" disabled={firstRepo === 0} onClick={() => this.onClickBack()}>Back</Button>
+                <Button className={styles.button} variant="outlined" disabled={repoList.length - lastRepo <= 0} onClick={() => this.onClickNext()}>Next</Button>
+              </CardActions>
+              }
             </Card>
           </div>
-       }
+        }
       </div>
     )
   }
